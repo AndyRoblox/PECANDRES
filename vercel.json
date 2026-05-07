@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "cd historia && python manage.py collectstatic --noinput",
+  "framework": null,
+  "buildCommand": "bash build_files.sh",
   "headers": [
     {
       "source": "/juego",
