@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "framework": null,
-  "buildCommand": "bash build_files.sh",
   "headers": [
     {
       "source": "/juego",
