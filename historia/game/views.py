@@ -4,8 +4,10 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.clickjacking import xframe_options_exempt
 from .models import Score
 
+@xframe_options_exempt
 @ensure_csrf_cookie
 def game_view(request):
     return render(request, 'game/juego.html')
