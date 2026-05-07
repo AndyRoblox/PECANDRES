@@ -1,0 +1,409 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{ titulo }}</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:0;
+}
+
+header, section, footer{
+    padding:20px;
+    border-bottom:1px solid #ccc;
+}
+
+nav a{
+    margin-right:15px;
+}
+
+canvas{
+    max-width:700px;
+    margin-top:20px;
+}
+
+iframe{
+    width:100%;
+    height:600px;
+}
+
+.video{
+    width:100%;
+    height:500px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 700px;
+    margin-top: 10px;
+}
+th {
+    background-color: #2e7d5e;
+    color: white;
+    padding: 8px;
+    text-align: left;
+}
+td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+.aumento { color: #c0392b; font-weight: bold; }
+.aumento-critico { color: #c0392b; font-weight: bold; }
+.aumento-fuerte { color: #c0392b; font-weight: bold; }
+.disminucion { color: #2e7d5e; font-weight: bold; }
+
+.comparativa-box {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-top: 10px;
+    max-width: 700px;
+}
+
+.baja { color: #2e7d5e; font-weight: bold; }
+.alza { color: #c0392b; font-weight: bold; }
+
+.factores-box {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-top: 10px;
+    max-width: 700px;
+}
+</style>
+</head>
+<body>
+
+<header>
+
+<h1>{{ titulo }}</h1>
+<p>{{ slogan }}</p>
+
+<nav>
+<a href="#inicio">Inicio</a>
+<a href="#panorama">Panorama</a>
+<a href="#graficas">Gráficas</a>
+<a href="#evidencias">Evidencias</a>
+<a href="#pronostico">Pronóstico</a>
+<a href="#video">Video</a>
+<a href="#juego">Juego</a>
+</nav>
+
+</header>
+
+
+<section id="inicio">
+
+<h2>Bienvenido</h2>
+
+<p>
+Proyecto enfocado en la prevención de adicciones,
+concientización social y toma de decisiones saludables.
+</p>
+
+</section>
+
+
+<section id="panorama">
+
+<h2>I. Panorama Actual en México (2025-2026)</h2>
+
+<p>
+De acuerdo con los datos más recientes de salud pública, el consumo de sustancias en
+México presenta un comportamiento diferenciado por grupos de edad. Mientras la
+prevención escolar surte efecto en menores, el mercado adulto se expande.
+</p>
+
+<div class="comparativa-box">
+    <strong>Comparativa Generacional</strong>
+    <ul>
+        <li>
+            <strong>Adolescentes (12-17 años):</strong> Se observa una tendencia a la
+            <span class="baja">BAJA</span>. La prevalencia de consumo de drogas ilegales descendió al 4.1%.
+        </li>
+        <li>
+            <strong>Adultos (18-65 años):</strong> Se observa una tendencia al
+            <span class="alza">ALZA</span>. La prevalencia subió al 14.6%, impulsada principalmente por el cannabis y estimulantes.
+        </li>
+    </ul>
+</div>
+
+<h2>II. Análisis por Tipo de Sustancia</h2>
+
+<p>Los siguientes datos representan el cambio porcentual en el consumo nacional durante el último ciclo de medición:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Sustancia / Problema</th>
+            <th>Estado (2016)</th>
+            <th>Estado (2025)</th>
+            <th>Dirección</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Cannabis (Uso en adultos)</td>
+            <td>9.3%</td>
+            <td>13.3%</td>
+            <td class="aumento">Aumento</td>
+        </tr>
+        <tr>
+            <td>Estimulantes Sintéticos</td>
+            <td>0.9%</td>
+            <td>1.5%</td>
+            <td class="aumento-critico">Aumento Crítico</td>
+        </tr>
+        <tr>
+            <td>Vapeadores / E-cigs</td>
+            <td>1.1%</td>
+            <td>2.6%</td>
+            <td class="aumento-fuerte">Aumento Fuerte</td>
+        </tr>
+        <tr>
+            <td>Alcohol (Adolescentes)</td>
+            <td>39.8%</td>
+            <td>33.9%</td>
+            <td class="disminucion">Disminución</td>
+        </tr>
+    </tbody>
+</table>
+
+</section>
+
+
+<section id="graficas">
+
+<h2>Gráficas Estadísticas</h2>
+
+<div>
+<h3>Principales Problemas</h3>
+<canvas id="grafica1"></canvas>
+</div>
+
+<div>
+<h3>Edad de Inicio</h3>
+<canvas id="grafica2"></canvas>
+</div>
+
+<div>
+<h3>Sustancias Más Consumidas</h3>
+<canvas id="grafica3"></canvas>
+</div>
+
+</section>
+
+
+
+<section id="evidencias">
+
+{% load static %}
+
+<iframe 
+    src="{% static 'pdf/pronostico.pdf' %}" 
+    width="100%" 
+    height="600">
+</iframe>
+
+</section>
+
+
+
+<section id="pronostico">
+
+<h2>III. Pronóstico a 5 Años (2026-2031)</h2>
+
+<p>Basado en el análisis de tendencias, los próximos 5 años en México se definirán por tres factores clave:</p>
+
+<div class="factores-box">
+    <p>
+        <strong>1. Sustitución Química:</strong> Se proyecta un aumento en la oferta de drogas diseñadas
+        en laboratorio (fentanilo, metanfetaminas) debido a su bajo costo de producción
+        frente a las drogas naturales.
+    </p>
+    <p>
+        <strong>2. Salud Mental y Consumo:</strong> El consumo se ligará cada vez más a trastornos
+        psicológicos. Se estima que 8 de cada 10 nuevos usuarios consumirán sustancias
+        como mecanismo para evadir ansiedad o depresión.
+    </p>
+    <p>
+        <strong>3. Brecha de Género:</strong> Se pronostica que la brecha de consumo entre hombres y
+        mujeres se cerrará casi por completo en el sector de alcohol y medicamentos
+        controlados para 2030.
+    </p>
+</div>
+
+<h3>Pronóstico de Tendencias de Consumo de Sustancias en México (2026-2031)</h3>
+<canvas id="graficaPronostico" style="max-width:700px; margin-top:20px;"></canvas>
+
+<p><strong>1. Sustitución Química:</strong> Mayor disponibilidad de drogas de laboratorio por bajo costo. Mayor potencia y riesgo.</p>
+<p><strong>2. Salud Mental:</strong> 8 de cada 10 nuevos casos vinculados a ansiedad o depresión no tratada. Automedicación.</p>
+<p><strong>3. Edad de Inicio:</strong> Edad de primer contacto bajando hacia los 11-12 años en zonas urbanas. Normalización.</p>
+
+</section>
+
+
+
+<section id="video">
+
+<h2>Video Informativo</h2>
+
+
+<iframe
+width="100%"
+height="500"
+src="https://www.youtube-nocookie.com/embed/CiYk_G4tEmQ"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe>
+
+</section>
+
+
+<section id="juego">
+    <h2>Juego Interactivo</h2>
+    <p>Aprende evitando las drogas mientras juegas.</p>
+
+    <a href="/juego/">
+        <button>🎮 Jugar Ahora</button>
+    </a>
+
+    <a href="/quiz/">
+        <button>📝 Hacer Quiz</button>
+    </a>
+</section>
+
+
+<footer>
+
+<p>Proyecto Django - Prevención de Adicciones</p>
+
+</footer>
+
+
+
+
+<script>
+
+new Chart(document.getElementById("grafica1"), {
+type: "bar",
+data: {
+labels: [
+"Adicción",
+"Violencia",
+"Problemas familiares",
+"Escolares",
+"Salud mental",
+"Muertes"
+],
+datasets: [{
+label: "Porcentaje",
+data: [40,30,20,15,25,10]
+}]
+}
+});
+
+
+new Chart(document.getElementById("grafica2"), {
+type: "pie",
+data: {
+labels: [
+"12-14",
+"15-17",
+"18-25",
+"26+"
+],
+datasets: [{
+data: [20,45,25,10]
+}]
+}
+});
+
+
+new Chart(document.getElementById("grafica3"), {
+type: "bar",
+data: {
+labels: [
+"Alcohol",
+"Tabaco",
+"Marihuana",
+"Inhalantes",
+"Metanfetaminas",
+"Cocaína"
+],
+datasets: [{
+label: "Nivel",
+data: [100,75,60,40,30,20]
+}]
+}
+});
+
+
+new Chart(document.getElementById("graficaPronostico"), {
+type: "line",
+data: {
+labels: ["2026", "2027", "2028", "2029", "2030", "2031"],
+datasets: [
+    {
+        label: "Alcohol (Población Adolescente 12-17)",
+        data: [20, 19.5, 19, 18.5, 18.2, 18],
+        borderColor: "#2196F3",
+        backgroundColor: "rgba(33,150,243,0.1)",
+        tension: 0.3,
+        fill: false
+    },
+    {
+        label: "Cannabis (Uso en Adultos)",
+        data: [13.3, 14, 14.8, 15.5, 16, 16.6],
+        borderColor: "#4CAF50",
+        backgroundColor: "rgba(76,175,80,0.1)",
+        tension: 0.3,
+        fill: false
+    },
+    {
+        label: "Sustancias Sintéticas (Metanfetaminas, etc.)",
+        data: [1.5, 2.5, 3.5, 4.5, 5.5, 6],
+        borderColor: "#FF9800",
+        backgroundColor: "rgba(255,152,0,0.1)",
+        tension: 0.3,
+        fill: false
+    }
+]
+},
+options: {
+    plugins: {
+        title: {
+            display: true,
+            text: "Pronóstico de Tendencias de Consumo de Sustancias en México (2026-2031)"
+        },
+        legend: {
+            position: "top"
+        }
+    },
+    scales: {
+        y: {
+            title: {
+                display: true,
+                text: "Prevalencia Estimada (% de la Población)"
+            },
+            min: 0,
+            max: 25
+        }
+    }
+}
+});
+
+</script>
+
+</body>
+</html>
