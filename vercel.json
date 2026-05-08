@@ -1,7 +1,11 @@
 {
   "version": 2,
-  "framework": null,
-  "outputDirectory": ".",
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    }
+  ],
   "headers": [
     {
       "source": "/juego",
